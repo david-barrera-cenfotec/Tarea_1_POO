@@ -1,9 +1,6 @@
 package ac.cr.ucenfotec.tarea1;
 
-import ac.cr.ucenfotec.tarea1.entidades.Cita;
-import ac.cr.ucenfotec.tarea1.entidades.Duenio;
-import ac.cr.ucenfotec.tarea1.entidades.Mascota;
-import ac.cr.ucenfotec.tarea1.entidades.Reservacion;
+import ac.cr.ucenfotec.tarea1.entidades.*;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -14,10 +11,18 @@ public class Main {
     private static Scanner input = new Scanner(System.in);
     private static PrintStream output = new PrintStream(System.out);
 
-    public static Mascota[] arregloDeMascotas = new Mascota[50];
-    public static Duenio[] arregloDeDuenios = new Duenio[50];
-    public static Cita[] arregloDeCitas = new Cita[50];
-    public static Reservacion[] arregloDeReservaciones = new Reservacion[50];
+
+    private static int nextPosicionMascota = 0;
+    private static int nextPosicionCita = 0;
+    private static int nextPosicionReservacion = 0;
+    private static int nextPosicionusuario = 0;
+
+
+    /* **** Arreglos para guardar la informacion **** */
+    private static Mascota[] arregloDeMascotas = new Mascota[50];
+    private static Cita[] arregloDeCitas = new Cita[50];
+    private static Reservacion[] arregloDeReservaciones = new Reservacion[50];
+    private static Usuario[] arregloDeUsuarios = new Usuario[50];
 
 
     public static void main(String[] args) {
@@ -28,12 +33,12 @@ public class Main {
                     mostrarMenu();
                     opcion = input.nextInt();
                     leerOpcionMenu(opcion);
-                } while (opcion != 7);
+                } while (opcion != 9);
 
     }
 
-    /* ********** Opciones del menu ********** */
 
+    /* ********** Opciones del menu ********** */
     // Opcion - 1: Registro de mascotas y su duenio
     public static void registrarMascota(){
         output.println("Nombre del dueño:");
@@ -51,53 +56,118 @@ public class Main {
         String nombre = input.next();
         output.println("Observaciones:");
         String observaciones = input.next();
-        output.println("Ranking (entre 1 y 3 estrellas:");
+        output.println("Ranking (entre 1 y 3 estrellas):");
         int ranking = input.nextInt();
         output.println("Enlace del archivo con la foto:");
         String foto = input.next();
 
         Mascota nuevaMascota = new Mascota(nombre, observaciones, ranking, foto, nuevoDuenio);
-        arregloDeMascotas[0] = nuevaMascota;
 
+            arregloDeMascotas[nextPosicionMascota] = nuevaMascota;
+            nextPosicionMascota++;
     }
 
-    // Opcion - 2: Listar las mascotas
 
+    // Opcion - 3: Registro de citas
+    public static void registrarCita(){
+        output.println("Nombre de la mascota:");
+        String nombreMascota = input.next();
+        output.println("Fecha de la cita:");
+        String fechaDeCita = input.next();
+        output.println("Hora de la cita:");
+        String horaDeCita = input.next();
+        output.println("Observaciones:");
+        String observaciones = input.next();
+        Cita nuevaCita = new Cita(nombreMascota, fechaDeCita, horaDeCita, observaciones);
+
+        arregloDeCitas[nextPosicionCita] = nuevaCita;
+        nextPosicionCita++;
+    }
+
+
+
+    // Opcion - 5: Registro de reservaciones
+    public static void registrarReservacion(){
+        output.println("Nombre de la mascota:");
+        String nombreMascota = input.next();
+        output.println("Fecha de entrada:");
+        String fechaDeEntrada = input.next();
+        output.println("Fecha de Salida:");
+        String fechaDeSalida = input.next();
+        Reservacion nuevaReservacion = new Reservacion(nombreMascota, fechaDeEntrada, fechaDeSalida);
+
+        arregloDeReservaciones[nextPosicionReservacion] = nuevaReservacion;
+        nextPosicionReservacion++;
+    }
+
+    // Opcion - 7: Registro de Usuarios
+    public static void registrarUsuario(){
+        output.println("Nombre del usuario:");
+        String nombreUsuario = input.next();
+        output.println("Número de cédula:");
+        String numeroCedula = input.next();
+        output.println("Teléfono:");
+        String telefono = input.next();
+        output.println("Dirección:");
+        String direccion = input.next();
+        output.println("¿Está activo? (sí: 'true', no: 'false'");
+        Boolean activo = input.nextBoolean();
+        output.println("Rol (enfermería, médico):");
+        String rol = input.next();
+        Usuario nuevoUsuario = new Usuario(nombreUsuario, numeroCedula, telefono, direccion, activo, rol);
+
+        arregloDeUsuarios[nextPosicionusuario] = nuevoUsuario;
+        nextPosicionusuario++;
+    }
 
 
     public static void leerOpcionMenu(int opcion){
         switch (opcion) {
             case 1:
-            registrarMascota();
-
+                registrarMascota();
                 break;
+
             case 2:
-                output.println(arregloDeMascotas[0]);
+                for(int i=0 ; i < arregloDeMascotas.length; i++){
+                    output.println("#"+ (i+1) + " " + arregloDeMascotas[i]);
+                    }
                 break;
+
             case 3:
-            //Registrar cita
-
+                registrarCita();
                 break;
+
             case 4:
-                //Listar citas
-
+                for(int i=0 ; i < arregloDeCitas.length; i++){
+                    output.println("#"+ (i+1) + " " + arregloDeCitas[i]);
+                }
                 break;
+
             case 5:
-                //Registrar reservaciones
-
+                registrarReservacion();
                 break;
+
             case 6:
-                //Listar reservaciones
-
+                for(int i=0 ; i < arregloDeReservaciones.length; i++){
+                    output.println("#"+ (i+1) + " " + arregloDeReservaciones[i]);
+                }
                 break;
+
             case 7:
-                //Registrar usuario
-
+                registrarUsuario();
                 break;
+
             case 8:
-                //Listar usaurios
-
+                for(int i=0 ; i < arregloDeUsuarios.length; i++){
+                    output.println("#"+ (i+1) + " " + arregloDeUsuarios[i]);
+                }
                 break;
+
+            case 9:
+                //Salir del menu
+                break;
+            default:
+                output.println("Opcion desconocida");
         }
     }
 

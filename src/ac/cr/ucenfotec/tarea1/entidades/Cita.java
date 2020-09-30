@@ -1,17 +1,17 @@
 package ac.cr.ucenfotec.tarea1.entidades;
 
 public class Cita {
-    private Mascota mascota;
+    private String mascota;
     private String fechaDeCita;
     private String horaDeCita;
     private String observaciones;
 
 
-    public Mascota getMascota() {
+    public String getMascota() {
         return mascota;
     }
 
-    public void setMascota(Mascota mascota) {
+    public void setMascota(String mascota) {
         this.mascota = mascota;
     }
 
@@ -39,7 +39,7 @@ public class Cita {
         this.observaciones = observaciones;
     }
 
-    public Cita(Mascota mascota, String fechaDeCita, String horaDeCita, String observaciones) {
+    public Cita(String mascota, String fechaDeCita, String horaDeCita, String observaciones) {
         this.mascota = mascota;
         this.fechaDeCita = fechaDeCita;
         this.horaDeCita = horaDeCita;
@@ -52,7 +52,7 @@ public class Cita {
     @Override
     public String toString() {
         return "Citas{" +
-                "mascota=" + mascota.getNombre() +
+                "mascota=" + mascota +
                 ", fechaDeCita='" + fechaDeCita + '\'' +
                 ", horaDeCita='" + horaDeCita + '\'' +
                 ", observaciones='" + observaciones + '\'' +
