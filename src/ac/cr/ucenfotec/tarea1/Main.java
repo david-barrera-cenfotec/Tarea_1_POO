@@ -62,9 +62,20 @@ public class Main {
         String foto = input.next();
 
         Mascota nuevaMascota = new Mascota(nombre, observaciones, ranking, foto, nuevoDuenio);
+        Boolean repetido = false;
 
+        for (int i=0; i<nextPosicionMascota; i++) {
+            if (nombre.equals(arregloDeMascotas[i].getNombre())){
+             repetido = true;
+            }
+        }
+
+        if(!repetido){
             arregloDeMascotas[nextPosicionMascota] = nuevaMascota;
             nextPosicionMascota++;
+        } else {
+            output.println("La mascota ya está previamente registrada. Revise los datos.");
+        }
     }
 
 
@@ -114,10 +125,22 @@ public class Main {
         Boolean activo = input.nextBoolean();
         output.println("Rol (enfermería, médico):");
         String rol = input.next();
-        Usuario nuevoUsuario = new Usuario(nombreUsuario, numeroCedula, telefono, direccion, activo, rol);
 
-        arregloDeUsuarios[nextPosicionusuario] = nuevoUsuario;
-        nextPosicionusuario++;
+        Usuario nuevoUsuario = new Usuario(nombreUsuario, numeroCedula, telefono, direccion, activo, rol);
+        Boolean repetido = false;
+
+        for (int i = 0; i<nextPosicionusuario; i++){
+            if(numeroCedula.equals(arregloDeUsuarios[i].getCedula())){
+                repetido = true;
+            }
+        }
+
+        if(!repetido) {
+            arregloDeUsuarios[nextPosicionusuario] = nuevoUsuario;
+            nextPosicionusuario++;
+        } else {
+            output.println("El usuario ya está previamente registreado: Revise los datos.");
+        }
     }
 
 
@@ -129,7 +152,9 @@ public class Main {
 
             case 2:
                 for(int i=0 ; i < arregloDeMascotas.length; i++){
-                    output.println("#"+ (i+1) + " " + arregloDeMascotas[i]);
+                    if(arregloDeMascotas[i] != null) {
+                        output.println("#" + (i + 1) + " " + arregloDeMascotas[i]);
+                        }
                     }
                 break;
 
@@ -139,7 +164,9 @@ public class Main {
 
             case 4:
                 for(int i=0 ; i < arregloDeCitas.length; i++){
-                    output.println("#"+ (i+1) + " " + arregloDeCitas[i]);
+                    if(arregloDeCitas[i] != null) {
+                        output.println("#" + (i + 1) + " " + arregloDeCitas[i]);
+                    }
                 }
                 break;
 
@@ -149,7 +176,9 @@ public class Main {
 
             case 6:
                 for(int i=0 ; i < arregloDeReservaciones.length; i++){
-                    output.println("#"+ (i+1) + " " + arregloDeReservaciones[i]);
+                    if(arregloDeReservaciones[i] != null) {
+                        output.println("#" + (i + 1) + " " + arregloDeReservaciones[i]);
+                    }
                 }
                 break;
 
@@ -159,7 +188,9 @@ public class Main {
 
             case 8:
                 for(int i=0 ; i < arregloDeUsuarios.length; i++){
-                    output.println("#"+ (i+1) + " " + arregloDeUsuarios[i]);
+                    if(arregloDeUsuarios[i] != null) {
+                        output.println("#" + (i + 1) + " " + arregloDeUsuarios[i]);
+                    }
                 }
                 break;
 
