@@ -12,6 +12,8 @@ public class Main {
     private static PrintStream output = new PrintStream(System.out);
 
 
+    /* **** Contadores de posicion para los arreglos **** */
+
     private static int nextPosicionMascota = 0;
     private static int nextPosicionCita = 0;
     private static int nextPosicionReservacion = 0;
